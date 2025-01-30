@@ -4,11 +4,15 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "productoffer")
 public class Product {
     @Id
@@ -36,5 +40,11 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_municipio", nullable = false)
     private Municipio idMunicipio;
+
+    @ManyToMany(mappedBy = "products")
+    private List<Cart> carts;
+
+    @ManyToMany(mappedBy = "products")
+    private List<Cart> orders;
 
 }
