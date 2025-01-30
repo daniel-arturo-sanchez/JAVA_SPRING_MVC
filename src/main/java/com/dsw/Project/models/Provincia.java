@@ -1,13 +1,13 @@
 package com.dsw.Project.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -22,5 +22,8 @@ public class Provincia {
     @NotNull
     @Column(name = "nombre", nullable = false, length = 30)
     private String nombre;
+
+    @OneToMany(mappedBy = "idProvincia")
+    private Set<Municipio> municipios = new LinkedHashSet<>();
 
 }

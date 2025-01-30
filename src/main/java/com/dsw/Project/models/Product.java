@@ -32,4 +32,9 @@ public class Product {
     @Column(name = "product_stock", nullable = false)
     private Integer productStock;
 
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_municipio", nullable = false)
+    private Municipio idMunicipio;
+
 }
