@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -13,12 +14,12 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "carrito")
+@Table(name = "pedido")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_order", nullable = false)
-    private int id;
+    private Integer id;
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
@@ -28,5 +29,7 @@ public class Order {
     )
     private List<Product> products;
 
-    private Date date;
+    private LocalDateTime orderDate;
+
+    private Float totalPrice;
 }

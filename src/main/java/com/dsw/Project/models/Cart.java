@@ -16,7 +16,7 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cart", nullable = false)
-    private int id;
+    private Integer id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user", referencedColumnName = "id_user")
@@ -29,4 +29,6 @@ public class Cart {
             inverseJoinColumns = { @JoinColumn(name = "product_id") }
     )
     private List<Product> products;
+
+    private Float totalPrice;
 }

@@ -17,8 +17,8 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_cart", nullable = false)
-    private int id;
+    @Column(name = "id_user", nullable = false)
+    private Integer id;
 
     @Column(name = "name", nullable = false, columnDefinition = "")
     private String name;
