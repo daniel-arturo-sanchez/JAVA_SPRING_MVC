@@ -1,5 +1,6 @@
 package com.dsw.Project.models;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.Getter;
@@ -39,4 +40,12 @@ public class User {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Cart cart;
+
+//    @PostConstruct
+//    public void init() {
+////        user@myikea.com → role USER
+////        manager@myikea.com → role MANAGER
+////        admin1@myikea.com → role ADMIN
+////        admin2@myikea.com → este ha de tener 2 roles, ADMIN y MANAGER
+//    }
 }
