@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Primary
 @Service
@@ -32,5 +33,10 @@ public class OrderService implements com.dsw.Project.interfaces.OrderService {
     @Override
     public Order details(int id) {
         return orderRepository.findById(id);
+    }
+
+    @Override
+    public List<Order> list() {
+        return orderRepository.findAll();
     }
 }

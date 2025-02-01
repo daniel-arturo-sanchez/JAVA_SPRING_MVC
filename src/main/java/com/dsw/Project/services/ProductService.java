@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Primary
 @Service
 public class ProductService implements com.dsw.Project.interfaces.ProductService {
@@ -20,5 +22,10 @@ public class ProductService implements com.dsw.Project.interfaces.ProductService
     @Override
     public Product getProduct(int id) {
         return productRepository.findById(id);
+    }
+
+    @Override
+    public List<Product> list() {
+        return productRepository.findAll();
     }
 }
