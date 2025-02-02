@@ -26,6 +26,6 @@ public class Provincia {
     private String nombre;
 
     @OneToMany(mappedBy = "idProvincia")
-    private Set<Municipio> municipios = new LinkedHashSet<>();
+    private Set<Municipio> municipios;
 
 }

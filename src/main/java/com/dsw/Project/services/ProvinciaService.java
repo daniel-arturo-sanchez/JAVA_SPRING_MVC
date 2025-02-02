@@ -5,7 +5,6 @@ import com.dsw.Project.repositories.ProvinciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Primary
@@ -23,6 +22,4 @@ public class ProvinciaService implements com.dsw.Project.interfaces.ProvinciaSer
     public Provincia detail(int id) {
         return provinciaRepository.findById(id);
     }
-
-
 }

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,8 +19,9 @@ public class Cart {
     @Column(name = "id_cart", nullable = false)
     private Integer id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_user", referencedColumnName = "id_user")
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id_user")
     private User user;
 
     @ManyToMany(cascade = { CascadeType.ALL })

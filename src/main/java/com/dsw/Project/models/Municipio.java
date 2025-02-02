@@ -9,7 +9,9 @@ import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -43,6 +45,6 @@ public class Municipio {
     private String nombre;
 
     @OneToMany(mappedBy = "idMunicipio")
-    private Set<Product> productoffers = new LinkedHashSet<>();
+    private List<Product> productoffers;
 
 }

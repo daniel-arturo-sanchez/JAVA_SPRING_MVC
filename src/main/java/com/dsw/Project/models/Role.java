@@ -1,7 +1,6 @@
 package com.dsw.Project.models;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "rol")
+@Table
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

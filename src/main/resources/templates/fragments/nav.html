@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th=”http://www.thymeleaf.org”>
+<html lang="en" xmlns:th=”http://www.thymeleaf.org”
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
@@ -14,9 +15,15 @@
     <li><a class="nav-item text-white text-decoration-none" href="/usuarios">Usuarios</a></li>
   </ul>
   <div class="d-flex justify-content-end position-absolute top-0 end-0 me-4">
-    <span class="text-light align-self-center">&lt;Username></span>
-    <form th:action="@{/logout}" method="post">
-      <input class="btn btn-outline-light text-light m-1" type="submit" value="Logout">
+    <ul class="d-flex flex-row list-unstyled" sec:authorize="isAnonymous()">
+        <li><a class="btn btn-secondary m-1 text-decoration-none" href="/register">Registro</a></li>
+        <li><a class="btn btn-outline-light text-light m-1 text-decoration-none" href="/login">Entrar</a></li>
+    </ul>
+    <span class="text-light align-self-center" sec:authorize="isAuthenticated()">
+      <span sec:authentication="name"></span>
+    </span>
+    <form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+      <input class="btn btn-outline-light m-1" type="submit" value="Logout">
     </form>
   </div>
 </nav>

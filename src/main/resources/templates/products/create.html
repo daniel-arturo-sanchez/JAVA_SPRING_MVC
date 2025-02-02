@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th=”http://www.thymeleaf.org”  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>MyIkea App - Nuevo Producto</title>
@@ -46,7 +46,7 @@
 
         <div class="form-group mb-3">
             <label for="idMunicipio">Municipio</label>
-            <select class="form-select" id="idMunicipio" th:field="*{idMunicipio}" th:classappend="${#fields.hasErrors('idMunicipio')} ? 'border border-danger' : ''" disabled>
+            <select class="form-select" id="idMunicipio" th:field="*{idMunicipio}" th:classappend="${#fields.hasErrors('idMunicipio')} ? 'border border-danger' : ''">
                 <option th:each="municipio : ${municipios}" th:value="${municipio.id}" th:text="${municipio.nombre}"></option>
             </select>
             <span th:if="${#fields.hasErrors('idMunicipio')}" th:errors="*{idMunicipio}" class="error small text-danger"></span>

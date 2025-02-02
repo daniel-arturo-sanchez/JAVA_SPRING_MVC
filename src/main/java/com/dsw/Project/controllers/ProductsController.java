@@ -1,21 +1,16 @@
 package com.dsw.Project.controllers;
 
-import com.dsw.Project.models.Municipio;
 import com.dsw.Project.models.Product;
-import com.dsw.Project.models.Provincia;
 import com.dsw.Project.services.MunicipioService;
 import com.dsw.Project.services.ProductService;
 import com.dsw.Project.services.ProvinciaService;
 import jakarta.validation.Valid;
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
-import java.util.List;
 
 @Controller
 public class ProductsController {

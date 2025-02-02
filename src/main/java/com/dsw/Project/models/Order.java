@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,4 +33,7 @@ public class Order {
     private LocalDateTime orderDate;
 
     private Float totalPrice;
+
+    @ManyToOne
+    private User user;
 }

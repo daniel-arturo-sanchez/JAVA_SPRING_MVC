@@ -2,6 +2,7 @@ package com.dsw.Project.services;
 
 import com.dsw.Project.models.Cart;
 import com.dsw.Project.models.Product;
+import com.dsw.Project.models.User;
 import com.dsw.Project.repositories.CartRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,6 @@ import java.util.List;
 @Service
 public class CartService implements com.dsw.Project.interfaces.CartService {
 
-    public Cart provisionalCart = new Cart();
-
-    @PostConstruct
-    public void init() {
-        provisionalCart.setId(1);
-        provisionalCart.setProducts(new ArrayList<Product>());
-        provisionalCart.setTotalPrice((float) 0);
-    }
-
     @Autowired
     private CartRepository cartRepository;
 
@@ -33,26 +25,27 @@ public class CartService implements com.dsw.Project.interfaces.CartService {
     }
 
     @Override
-    public void createCart(Cart cart) {
+    public void createCart(Cart cart, User user) {
+        cart.setUser(user);
+        cartRepository.saveAndFlush(cart);
         cart.setProducts(new ArrayList<Product>());
         cart.setTotalPrice((float) 0);
-        cartRepository.save(cart);
+        cartRepository.saveAndFlush(cart);
     }
 
     @Override
     public void emptyCart(Cart cart) {
          cart.setProducts(new ArrayList<Product>());
          cart.setTotalPrice((float) 0);
-         cartRepository.save(cart);
+         cartRepository.saveAndFlush(cart);
     }
 
     @Override
     public void addProductToCart(Cart cart, Product product) {
         List<Product> products = cart.getProducts();
         products.add(product);
-        cart.setProducts(products);
         cart.setTotalPrice(cart.getTotalPrice() + product.getProductPrice());
-        cartRepository.save(cart);
+        cartRepository.saveAndFlush(cart);
     }
 
     @Override
@@ -64,9 +57,14 @@ public class CartService implements com.dsw.Project.interfaces.CartService {
                 products.remove(removeItem);
                 cart.setProducts(products);
                 cart.setTotalPrice(cart.getTotalPrice() - product.getProductPrice());
-                cartRepository.save(cart);
+                cartRepository.saveAndFlush(cart);
             }
         }
 
+    }
+
+    @Override
+    public Cart findCartByUser(User user) {
+        return cartRepository.findCartByUserId(user.getId());
     }
 }

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -29,6 +30,7 @@ public class Product {
     private Float productPrice;
 
     @Size(max = 512)
+    @NotNull
     @Column(name = "product_picture", length = 512)
     private String productPicture;
 
