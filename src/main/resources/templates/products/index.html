@@ -11,7 +11,7 @@
     <body>
         <div th:replace="~{fragments/nav::menu}"></div>
         <h1 class="text-start">Listado de Productos</h1>
-        <a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')" href="/productos/crear">Crear Nuevo Producto</a>
+        <a sec:authorize="hasAnyRole('ADMIN','MANAGER')" href="/productos/crear">Crear Nuevo Producto</a>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -37,7 +37,7 @@
                          onerror="this.onerror=null; this.src='/images/default.png';"></td>
                 <td>
                     <a class="btn btn-outline-success" th:href="@{/productos/detalles/{id} (id=${product.id})}">Detalles</a>
-                    <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-outline-info" th:href="@{/carrito/agregar/{id} (id=${product.id})}">Comprar</a>
+                    <a sec:authorize="hasRole('ADMIN')" class="btn btn-outline-info" th:href="@{/carrito/agregar/{id} (id=${product.id})}">Comprar</a>
                 </td>
             </tr>
             </tbody>

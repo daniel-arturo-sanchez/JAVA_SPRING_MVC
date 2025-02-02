@@ -7,12 +7,14 @@ import com.dsw.Project.services.CartService;
 import com.dsw.Project.services.ProductService;
 import com.dsw.Project.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.security.core.userdetails.UserDetails;
 
+@PreAuthorize("hasRole('ADMIN')")
 @Controller
 public class CarritoController {
 
