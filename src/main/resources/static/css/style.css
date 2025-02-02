@@ -1,0 +1,30 @@
+.item {
+    align-items: center;
+    box-sizing: border-box;
+    padding: 8px;
+    object-fit: contain;
+}
+
+/* Responsive image */
+.item img {
+    max-width: 200px;
+    height: auto;
+    margin-right: 16px;
+    border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .item {
+        width: calc(50% - 16px); /* 2 items per row on tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .item {
+        width: 100%; /* 1 item per row on mobile */
+    }
+}
+nav a:hover{
+    text-shadow:white 0 0 10px;
+}
