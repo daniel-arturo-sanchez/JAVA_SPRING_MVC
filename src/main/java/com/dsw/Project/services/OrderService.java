@@ -3,6 +3,7 @@ package com.dsw.Project.services;
 import com.dsw.Project.models.Cart;
 import com.dsw.Project.models.Order;
 import com.dsw.Project.models.Product;
+import com.dsw.Project.models.User;
 import com.dsw.Project.repositories.CartRepository;
 import com.dsw.Project.repositories.OrderRepository;
 import jakarta.annotation.PostConstruct;
@@ -23,11 +24,18 @@ public class OrderService implements com.dsw.Project.interfaces.OrderService {
     @Autowired
     private CartService cs;
 
+
+
     @Override
-    public void createOrder(Cart cart) {
+    public void createOrder(Cart cart, User user) {
         Order order = new Order();
+        order.setUser(user);
         order.setOrderDate(LocalDateTime.now());
-        order.setProducts(cart.getProducts());
+        List<Product> productsCopy = new ArrayList<>();
+        for (Product product : cart.getProducts()) {
+            productsCopy.add(product); // Assuming Product has a copy constructor
+        }
+        order.setProducts(productsCopy);
         order.setTotalPrice(cart.getTotalPrice());
         orderRepository.saveAndFlush(order);
         cs.emptyCart(cart);

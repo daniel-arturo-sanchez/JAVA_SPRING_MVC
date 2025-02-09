@@ -1,5 +1,6 @@
 package com.dsw.Project.controllers;
 
+import com.dsw.Project.models.Cart;
 import com.dsw.Project.models.Order;
 import com.dsw.Project.models.User;
 import com.dsw.Project.services.CartService;
@@ -7,6 +8,8 @@ import com.dsw.Project.services.OrderService;
 import com.dsw.Project.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,8 +29,8 @@ public class OrdersController {
     private UserService userService;
 
     @GetMapping("/pedidos")
-    public String index(Model model, UserDetails authenticatedPrincipal) {
-        User user = userService.findByUsername(authenticatedPrincipal.getUsername());
+    public String index(Model model) {
+        User user = userService.findByUsername(getAuthenticatedUsername());
         List<Order> orders = orderService.findByUser(user.getId());
         if(orderService.list() == null) {
             orders = new ArrayList<Order>();
@@ -45,15 +48,24 @@ public class OrdersController {
     }
 
     @GetMapping("/pedidos/crear")
-    public String createOrder(UserDetails authenticatedPrincipal) {
+    public String createOrder() {
         String result;
-        int num = cartService.details(1).getProducts().size();
-        if(num == 0) {
+        User user = userService.findByUsername(getAuthenticatedUsername());
+        Cart cart = cartService.details(user.getId());
+        if(cart.getProducts().isEmpty()) {
             result = "cart/index";
         } else {
-            orderService.createOrder(cartService.details(userService.findByUsername(authenticatedPrincipal.getUsername()).getId()));
-            result = "redirect:/productos";
+            orderService.createOrder(cart, user);
+            result = "redirect:/pedidos";
         }
         return result;
+    }
+    public String getAuthenticatedUsername() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            return userDetails.getUsername();
+        }
+        return null;
     }
 }

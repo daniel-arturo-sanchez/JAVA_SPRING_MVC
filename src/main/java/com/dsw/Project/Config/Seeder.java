@@ -35,24 +35,24 @@ public class Seeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Role roleUser = roleService.findByName("USER");
+        Role roleUser = roleService.findByName("ROLE_USER");
         if (roleUser == null) {
             roleUser = new Role();
-            roleUser.setName("USER");
+            roleUser.setName("ROLE_USER");
             RoleRepository.saveAndFlush(roleUser);
         }
 
-        Role roleManager = roleService.findByName("MANAGER");
+        Role roleManager = roleService.findByName("ROLE_MANAGER");
         if (roleManager == null) {
             roleManager = new Role();
-            roleManager.setName("MANAGER");
+            roleManager.setName("ROLE_MANAGER");
             RoleRepository.saveAndFlush(roleManager);
         }
 
-        Role roleAdmin = roleService.findByName("ADMIN");
+        Role roleAdmin = roleService.findByName("ROLE_ADMIN");
         if (roleAdmin == null) {
             roleAdmin = new Role();
-            roleAdmin.setName("ADMIN");
+            roleAdmin.setName("ROLE_ADMIN");
             RoleRepository.saveAndFlush(roleAdmin);
         }
 
@@ -62,7 +62,7 @@ public class Seeder implements CommandLineRunner {
             user.setUsername("user@myikea.com");
             user.setPassword(passwordEncoder.encode("Qwer123!"));
             user.setRoles(new ArrayList<Role>());
-            user.getRoles().add(roleService.findByName("USER"));
+            user.getRoles().add(roleService.findByName("ROLE_USER"));
             Cart userCart = new Cart();
             cartService.createCart(userCart, user);
             userRepository.saveAndFlush(user);
@@ -75,7 +75,7 @@ public class Seeder implements CommandLineRunner {
             manager.setUsername("manager@myikea.com");
             manager.setPassword(passwordEncoder.encode("Qwer123!"));
             manager.setRoles(new ArrayList<Role>());
-            manager.getRoles().add(roleService.findByName("MANAGER"));
+            manager.getRoles().add(roleService.findByName("ROLE_MANAGER"));
             Cart userCart = new Cart();
             cartService.createCart(userCart, manager);
             userRepository.saveAndFlush(manager);
@@ -88,7 +88,7 @@ public class Seeder implements CommandLineRunner {
             admin1.setUsername("admin1@myikea.com");
             admin1.setPassword(passwordEncoder.encode("Qwer123!"));
             admin1.setRoles(new ArrayList<Role>());
-            admin1.getRoles().add(roleService.findByName("ADMIN"));
+            admin1.getRoles().add(roleService.findByName("ROLE_ADMIN"));
             Cart userCart = new Cart();
             cartService.createCart(userCart, admin1);
             userRepository.saveAndFlush(admin1);
@@ -100,8 +100,8 @@ public class Seeder implements CommandLineRunner {
             admin2.setUsername("admin2@myikea.com");
             admin2.setPassword(passwordEncoder.encode("Qwer123!"));
             admin2.setRoles(new ArrayList<Role>());
-            admin2.getRoles().add(roleService.findByName("MANAGER"));
-            admin2.getRoles().add(roleService.findByName("ADMIN"));
+            admin2.getRoles().add(roleService.findByName("ROLE_MANAGER"));
+            admin2.getRoles().add(roleService.findByName("ROLE_ADMIN"));
             Cart userCart = new Cart();
             cartService.createCart(userCart, admin2);
             userRepository.saveAndFlush(admin2);

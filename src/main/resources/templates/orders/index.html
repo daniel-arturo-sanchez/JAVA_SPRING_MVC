@@ -23,10 +23,8 @@
         <td th:text="${order.id}"></td>
         <td th:text="${order.orderDate}"></td>
         <td th:text="${order.totalPrice}"></td>
-        <td class="item" ><img th:src="'images/'+${product.productPicture}" th:alt="${product.productPicture}"
-                               onerror="this.onerror=null; this.src='/images/default.png';"></td>
         <td>
-            <a class="btn btn-outline-success" th:href="@{/pedidos/detalles/{id} (id=${product.id})}">Detalles</a>
+            <a class="btn btn-outline-success" th:href="@{/pedidos/detalles/{id}(id=${order.id})}">Detalles</a>
         </td>
     </tr>
     </tbody>

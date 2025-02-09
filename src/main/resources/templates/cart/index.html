@@ -27,7 +27,7 @@
         <td class="item" ><img th:src="'images/'+${product.productPicture}" th:alt="${product.productPicture}"
                                onerror="this.onerror=null; this.src='/images/default.png';"></td>
         <td>
-            <a class="btn btn-outline-danger" th:action="@{/carrito/eliminar/{id} (id=${product.id})}">Eliminar</a>
+            <a class="btn btn-outline-danger" th:href="@{/carrito/eliminar/{id}(id=${product.id})}">Eliminar</a>
         </td>
     </tr>
     </tbody>

@@ -6,7 +6,10 @@ import com.dsw.Project.models.User;
 import com.dsw.Project.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -62,23 +65,18 @@ public class UserService implements com.dsw.Project.interfaces.UserService {
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
-        UserDetails userDetails = new UserDetails() {
-            @Override
-            public Collection<? extends GrantedAuthority> getAuthorities() {
-                return List.of();
-            }
-
-            @Override
-            public String getPassword() {
-                return user.getPassword();
-            }
-
-            @Override
-            public String getUsername() {
-                return user.getUsername();
-            }
-        };
-        return userDetails;
+        return new org.springframework.security.core.userdetails.User(
+                user.getUsername(),
+                user.getPassword(),
+                getAuthorities(user)
+        );
     }
 
+    private Collection<? extends GrantedAuthority> getAuthorities(User user) {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        for (Role role : user.getRoles()) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+        return authorities;
+    }
 }

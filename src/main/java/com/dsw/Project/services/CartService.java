@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Primary
 @Service
@@ -52,7 +53,7 @@ public class CartService implements com.dsw.Project.interfaces.CartService {
     public void removeProductFromCart(Cart cart, Product product) {
         if(cart.getProducts().isEmpty() || cart.getTotalPrice() != 0) {
             List<Product> products = cart.getProducts();
-            Product removeItem = products.stream().filter(p -> p.getId() == product.getId()).findFirst().orElse(null);
+            Product removeItem = products.stream().filter(p -> Objects.equals(p.getId(), product.getId())).findFirst().orElse(null);
             if(removeItem != null) {
                 products.remove(removeItem);
                 cart.setProducts(products);
